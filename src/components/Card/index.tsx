@@ -1,9 +1,11 @@
-import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import Swiper from 'react-native-swiper';
 
 import * as Styled from './styles';
 
 const Card: React.FC = () => {
+  const [stop, setStop] = useState(5);
+
   var maps = [
     'Bleasdale Farmhouse',
     'Edgefield Street House',
@@ -18,7 +20,12 @@ const Card: React.FC = () => {
   ];
 
   return (
-    <ScrollView>
+    <Swiper
+      style={{}}
+      autoplay
+      loop
+      showsPagination={false}
+      autoplayTimeout={0.5}>
       {maps.map((map, key) => {
         return (
           <Styled.CardBody key={key}>
@@ -26,7 +33,7 @@ const Card: React.FC = () => {
           </Styled.CardBody>
         );
       })}
-    </ScrollView>
+    </Swiper>
   );
 };
 

@@ -10,13 +10,22 @@
 
 import React from 'react';
 import {View} from 'react-native';
+import * as Styled from './styles';
 
 import Card from './src/components/Card';
 
 const App = () => {
   return (
-    <View style={{backgroundColor: '#0D1321', height: '100%'}}>
-      <Card />
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        backgroundColor: '#104547',
+      }}>
+      <Styled.MainBody>
+        <Card />
+      </Styled.MainBody>
     </View>
   );
 };
