@@ -21,7 +21,7 @@ const App = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        backgroundColor: '#104547',
+        backgroundColor: '#0d1321',
       }}>
       <Styled.MainBody>
         <Card />

@@ -1,39 +1,51 @@
 import React, {useState} from 'react';
+import {Text, View} from 'react-native';
 import Swiper from 'react-native-swiper';
+import {mapsList} from '../../helpers/maps';
 
 import * as Styled from './styles';
 
 const Card: React.FC = () => {
-  const [stop, setStop] = useState(5);
+  const [play, setPlay] = useState(false);
+  const [buttonText, setButtonText] = useState('Start');
 
-  var maps = [
-    'Bleasdale Farmhouse',
-    'Edgefield Street House',
-    'Grafton Farmhouse',
-    'Ridgeview Road House',
-    'Tanglewood Street House',
-    'Willow Street House',
-    'Brownstone High School',
-    'Maple Lodge Campsite',
-    'Prison',
-    'Asylum',
-  ];
+  const startRoulete = () => {
+    if (play) {
+      setTimeout(() => {
+        setPlay(false);
+      }, 1000);
+    } else {
+      setMaps(maps.sort(() => 0.5 - Math.random()));
+      setPlay(true);
+      setButtonText('Stop');
+    }
+  };
+
+  const [maps, setMaps] = useState(mapsList);
 
   return (
-    <Swiper
-      style={{}}
-      autoplay
-      loop
-      showsPagination={false}
-      autoplayTimeout={0.5}>
-      {maps.map((map, key) => {
-        return (
-          <Styled.CardBody key={key}>
-            <Styled.MapName>{map}</Styled.MapName>
-          </Styled.CardBody>
-        );
-      })}
-    </Swiper>
+    <>
+      <View>
+        <Swiper
+          autoplay={play}
+          loop
+          showsPagination={false}
+          autoplayTimeout={0.3}>
+          {maps.map(map => {
+            return (
+              <React.Fragment key={map.name}>
+                <Styled.CardBody source={map.image} resizeMode="cover" />
+
+                <Styled.MapName>{map.name}</Styled.MapName>
+              </React.Fragment>
+            );
+          })}
+        </Swiper>
+      </View>
+      <Styled.Button onPress={() => startRoulete()}>
+        <Text style={{color: '#494587', fontSize: 18}}>{buttonText}</Text>
+      </Styled.Button>
+    </>
   );
 };
 
